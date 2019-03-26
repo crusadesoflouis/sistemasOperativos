@@ -61,13 +61,32 @@ void tiki_taka() {}
 
 a)
 int contador = 0;
-int hijo = fork()
+int padre = getCurrentID();
+int hijo = fork();
   if (hijo != 0 ){
-	brecieve(hijo,hacerAlgo);
-    	bsend(hijo,self.pid());
+	contador = brecieve(hijo);
+	contador = contador + 1;
+    	bsend(hijo,get_current_pid());
 	bsend(hijo,contador);
-
     }
   else{
+	contador = brecieve(padre);
+	contador = contador +1;
+	bsend(padre, get_current_pid());
+	bsend(padre,contador());
 
   }
+
+
+
+
+
+
+9)
+
+
+
+
+
+
+

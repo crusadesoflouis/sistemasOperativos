@@ -33,21 +33,25 @@ int main (int argc, char* argv[]){
 		int status;
 		//(void)waitpid(pid, &s, 0);
 		waitpid(pidForHomer, &status, 0);
+		sleep(1);
 		imprimeAbraham();
 	}
 	else{
 		int pidForLisa = fork();
 		if (pidForLisa == 0) {
+			sleep(1);
 			imprimeLisa();
 		}
 		else{
 			int pidForBart = fork();
 			if (pidForBart == 0) {
+				sleep(1);
 				imprimeBart();
 			}
 			else{
 					int pidForMaggie = fork();
 					if (pidForMaggie == 0) {
+						sleep(1);
 						imprimeMaggie();
 					}
 					else{
@@ -55,6 +59,7 @@ int main (int argc, char* argv[]){
 						waitpid(pidForLisa, &status, 0);
 						waitpid(pidForBart, &status, 0);
 						waitpid(pidForMaggie, &status, 0);
+						sleep(1);
 						imprimeHomer();
 					}
 			}

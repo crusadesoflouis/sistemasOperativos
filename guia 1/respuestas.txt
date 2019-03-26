@@ -1,9 +1,9 @@
 1) cambio de contexto
 
-proceso que se esta ejecuntando 
-guardar registros, eip,ebp recursos que esta usando flags,variables locales 
+proceso que se esta ejecuntando
+guardar registros, eip,ebp recursos que esta usando flags,variables locales
 
-2) pcb process control block el que tenia los estados de las tablas 
+2) pcb process control block el que tenia los estados de las tablas
 
 function contexChanged
 
@@ -22,47 +22,52 @@ r15 = pcb2.r15
 set_current_process(pcb2.pid)
 call ke_reset:current_user_time
 push pcb2.pc()
-ret 
+ret
 
 b)esta todo ok
 
 
 3) la diferencia es que, una syscall requiere la intervencion del sistema operativo para funcionar
-en cambio una llamada a una funcion de una libreria, no necesariamente tiene que llamar al sistema 
+en cambio una llamada a una funcion de una libreria, no necesariamente tiene que llamar al sistema
 operativo para funcionar.
 
-4)esqueduler maneja todo, el proceso transita estos estados, los recursos pueden hacerse transisionar hacia los estados blcked 
+4)esqueduler maneja todo, el proceso transita estos estados, los recursos pueden hacerse transisionar hacia los estados blcked
 
 
-					
+
+
+7) ver el tema de posibles conflictos
+
+a) tiki y taka  deberian ser variables en el espacio compartido
+b) temp no necesita ser compartida
+c)
+void taka_runner (){}
+void tiki_taka() {}
+	int tiki;
+	int taka;
+	share_mem(tiki);
+	share_mem(taka);
+
+
+	int takaProcess = fork();
+	if (takaProcess == 0 ) {
+			taka_runner();
+	}
+	else{
+		tiki_taka();
+}
+
+8)
+
 a)
-pid = fork ()
-	if (pid_homer != 0 )
-		wait (pid_homer)
-		print abraham
-	else
-		pid_lisa = fork()
-		if (pid_lisa == 0 )
-			print lisa
-		else
-			pid_bart = fork()
-			if (pid_bart == 0 )
-				print bart
-			else
-				pid_maggie = fork()
-				if (pid_maggie == 0 )
-				print maggie
-				else
-					wait (pid_lisa)
-					wait (pid_bart)
-					wait (pid_maggie)
-					print homer
-					
-					
-					
-					
-6) seguir en casa
+int contador = 0;
+int hijo = fork()
+  if (hijo != 0 ){
+	brecieve(hijo,hacerAlgo);
+    	bsend(hijo,self.pid());
+	bsend(hijo,contador);
 
-7)poner a dormir al otro para que no haya un problema de coherencia
+    }
+  else{
 
-8) 
+  }

@@ -1,0 +1,68 @@
+1) cambio de contexto
+
+proceso que se esta ejecuntando 
+guardar registros, eip,ebp recursos que esta usando flags,variables locales 
+
+2) pcb process control block el que tenia los estados de las tablas 
+
+function contexChanged
+
+a)
+pcb1.r0 = r0
+..
+pcb1.r15 = r15
+pcb1.stat = ke_ready
+pcb1.cpu time = cpu time + current user time
+pcb1.pc = eip
+r0 = pcb2.r15
+..
+..
+r15 = pcb2.r15
+
+set_current_process(pcb2.pid)
+call ke_reset:current_user_time
+push pcb2.pc()
+ret 
+
+b)esta todo ok
+
+
+3) la diferencia es que, una syscall requiere la intervencion del sistema operativo para funcionar
+en cambio una llamada a una funcion de una libreria, no necesariamente tiene que llamar al sistema 
+operativo para funcionar.
+
+4)esqueduler maneja todo, el proceso transita estos estados, los recursos pueden hacerse transisionar hacia los estados blcked 
+
+
+					
+a)
+pid = fork ()
+	if (pid_homer != 0 )
+		wait (pid_homer)
+		print abraham
+	else
+		pid_lisa = fork()
+		if (pid_lisa == 0 )
+			print lisa
+		else
+			pid_bart = fork()
+			if (pid_bart == 0 )
+				print bart
+			else
+				pid_maggie = fork()
+				if (pid_maggie == 0 )
+				print maggie
+				else
+					wait (pid_lisa)
+					wait (pid_bart)
+					wait (pid_maggie)
+					print homer
+					
+					
+					
+					
+6) seguir en casa
+
+7)poner a dormir al otro para que no haya un problema de coherencia
+
+8) 

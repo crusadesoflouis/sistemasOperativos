@@ -78,15 +78,54 @@ int hijo = fork();
   }
 
 
+b)
 
+(shared) int counter = 0;
+
+int padre = getCurrentID();
+int ready_1 = False;
+int ready_2 = False;
+int hijo_0 = fork();
+
+		if ( hijo_0 == 0 ){
+			while(ready_2){
+				write (counter);
+				counter += 1;
+				}
+			}
+		}
+		else{
+			int hijo_1 = fork ()
+					if(hijo_1 == 0){
+					 while (ready_1){
+						 write (counter);
+						 counter += 1;
+						 ready_2 = True;
+					 }
+					}
+					else{
+					ready_1 = True;
+					}
+}
 
 
 
 9)
+a) deberian empezar defasados para que puedan funcionar ? porque el izquierdo espera a que procese el derecho
+pero el derecho tiene que esperara tener el resultado despues de ejecutarse una vez el computo muy dificil 2
+
+b) podria agregarse una espera o una señal para que procese despues de un rato la señal.. hay que ver
 
 
+10)
+
+a)se podrian ejecutar los dos en paralelo y con memoria compartida porque en teoria los ojos estan lejos del borde
+pero podria el caso de que una foto sea medio cortada y se choquen al querer modificar un ojo en el borde
 
 
+b) lo dice en el enunciado, con pasaje de mensaje
+
+c) WAT?
 
 
-
+11)

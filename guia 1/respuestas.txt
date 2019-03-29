@@ -54,8 +54,15 @@ void tiki_taka() {}
 			taka_runner();
 	}
 	else{
-		tiki_taka();
+		pid2 = fork();
+		if(pid2 == 0){
+			tiki_taka();
+		}else{
+			waiitchaild(pid);
+		}
+		waitchaild(takaProcess);
 }
+los wait son para evitar el problema de paralelismo y que ejecuten secuencialmente. ver
 
 8)
 
